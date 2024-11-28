@@ -31,7 +31,7 @@
                title="Please enter a valid email address (e.g., mbetsaanold@gmail.com)"><br>
 
                 <label for="phone">Phone (optional):</label>
-                <input type="tel" id="phone" name="phone" required pattern="\+263\s7\d{2}\s\d{3}\s\d{3}" 
+                <input type="tel" id="phone" name="phone" pattern="\+263\s7\d{2}\s\d{3}\s\d{3}" 
                 title="Format: +263 777 379 313"><br><br>
 
                 <label for="interest">What are you willing to give from the needed items list?</label>
@@ -85,10 +85,13 @@
             const interest = document.getElementById('interest').value;
             const message = document.getElementById('message').value;
 
-            // Validate the input
             const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
             const phonePattern = /^\+263\s7\d{2}\s\d{3}\s\d{3}$/;
 
+            if (!name || !email || !interest || !message) {
+                alert("Please fill in all required fields.");
+                return;
+            }
             if (!emailPattern.test(email)) {
                 alert("Please enter a valid email address.");
                 return;
