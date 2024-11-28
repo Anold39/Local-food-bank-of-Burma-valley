@@ -20,7 +20,7 @@
     <main>
         <section>
             <h2 class="heading">Sign Up to Help</h2>
-            <img src="The helper.jpg"alt="charity quote" class="quote">
+            <img src="C:\Users\yaza\.vscode\web project 2\The helper.jpg" alt="charity quote" class="quote">
             <p>Thank you for your interest in volunteering! Please fill out the form below:</p>
 
             <form id="volunteerForm">
@@ -29,7 +29,7 @@
 
                 <label for="phone">Phone:</label>
                 <input type="tel" id="phone" name="phone" required pattern="\+263\s7\d{2}\s\d{3}\s\d{3}" 
-                 title="Format: +263 777 379 313"><br>
+                 title="Format: +263 777 379 313"><br>
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required 
@@ -57,24 +57,42 @@
         <p>&copy; 2024 Local Food Bank. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to enhance dynamic capabilities -->
     <script>
         // Function to save volunteer data to local storage
         function saveVolunteerData() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const interest = document.getElementById('interest').value;
+            const availability = document.getElementById('availability').value;
+
+            // Validate the input
+            const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            const phonePattern = /^\+263\s7\d{2}\s\d{3}\s\d{3}$/;
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid phone number in the format: +263 777 379 313.");
+                return;
+            }
+
             const volunteerData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                interest: document.getElementById('interest').value,
-                availability: document.getElementById('availability').value
+                name,
+                phone,
+                email,
+                interest,
+                availability
             };
 
             // Store in local storage
             localStorage.setItem('volunteerData', JSON.stringify(volunteerData));
             alert('Thank you for signing up! Your information has been saved.');
 
-               // Reset the form fields
-               document.getElementById('volunteerForm').reset();
+            // Reset the form fields
+            document.getElementById('volunteerForm').reset();
         }
 
         // Load data on page load
