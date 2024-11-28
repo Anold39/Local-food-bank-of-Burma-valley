@@ -20,7 +20,7 @@
     <main>
         <section>
             <h2 class="heading">Sign Up to Help</h2>
-            <img src="The helper.jpg" alt="charity quote" class="quote">
+            <img src="C:\Users\yaza\.vscode\web project 2\The helper.jpg" alt="charity quote" class="quote">
             <p>Thank you for your interest in volunteering! Please fill out the form below:</p>
 
             <form id="volunteerForm">
@@ -58,7 +58,6 @@
     </footer>
 
     <script>
-        // Function to save volunteer data to local storage
         function saveVolunteerData() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
@@ -66,10 +65,13 @@
             const interest = document.getElementById('interest').value;
             const availability = document.getElementById('availability').value;
 
-            // Validate the input
             const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
             const phonePattern = /^\+263\s7\d{2}\s\d{3}\s\d{3}$/;
 
+            if (!name || !email || !interest) {
+                alert("Please fill in all required fields.");
+                return;
+            }
             if (!emailPattern.test(email)) {
                 alert("Please enter a valid email address.");
                 return;
@@ -87,15 +89,12 @@
                 availability
             };
 
-            // Store in local storage
             localStorage.setItem('volunteerData', JSON.stringify(volunteerData));
             alert('Thank you for signing up! Your information has been saved.');
 
-            // Reset the form fields
             document.getElementById('volunteerForm').reset();
         }
 
-        // Load data on page load
         window.onload = function() {
             const savedData = JSON.parse(localStorage.getItem('volunteerData'));
             if (savedData) {
